@@ -1,0 +1,14 @@
+{
+  "name": "fullstack-personal-portfolio",
+  "version": "1.0.0",
+  "description": "Full-Stack Personal Portfolio Website with React, Express, and SQLite",
+  "scripts": {
+    "server": "node server/index.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm run build --prefix client"
+  },
+  "keywords": ["portfolio", "react", "express", "sqlite", "fullstack"],
+  "author": "",
+  "license": "ISC"
+}
