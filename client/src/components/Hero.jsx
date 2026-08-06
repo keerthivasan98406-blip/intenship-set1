@@ -174,7 +174,7 @@ export default function Hero() {
                 background: '#0a0a0a',
               }}>
                 <img
-                  src="/profile.png"
+                  src="./profile.png"
                   alt="Keerthivasan A"
                   style={{
                     width: '100%',
