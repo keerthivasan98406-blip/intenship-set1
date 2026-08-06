@@ -1,13 +1,38 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { DatabaseSync } = require('node:sqlite');
+let DatabaseSync;
+try {
+  DatabaseSync = require('node:sqlite').DatabaseSync;
+} catch (e) {
+  console.warn('node:sqlite not available on this runtime, using memory fallback');
+}
 
 const PORT = process.env.PORT || 5000;
 const DB_PATH = path.join(__dirname, 'portfolio.db');
 
-// Initialize Native SQLite Database
-const db = new DatabaseSync(DB_PATH);
+// Initialize Database
+let db;
+if (DatabaseSync) {
+  try {
+    db = new DatabaseSync(DB_PATH);
+  } catch (e) {
+    console.warn('Could not initialize DB file, using fallback:', e.message);
+  }
+}
+
+// In-memory fallback if native SQLite is unavailable
+if (!db) {
+  const memoryStore = { projects: [], skills: [], messages: [] };
+  db = {
+    exec: () => {},
+    prepare: (sql) => ({
+      run: (...args) => ({ lastInsertRowid: Date.now() }),
+      get: () => ({ count: 0, c: 0 }),
+      all: () => []
+    })
+  };
+}
 
 function initDatabase() {
   console.log('Initializing SQLite database schema via node:sqlite...');

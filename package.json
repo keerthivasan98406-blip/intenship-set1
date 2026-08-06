@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Full-Stack Personal Portfolio Website with React, Express, and SQLite",
   "scripts": {
-    "server": "node server/index.js",
+    "start": "node server.js",
+    "build": "npm run build --prefix client",
+    "server": "node server.js",
     "client": "npm run dev --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm run build --prefix client"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "keywords": ["portfolio", "react", "express", "sqlite", "fullstack"],
   "author": "",

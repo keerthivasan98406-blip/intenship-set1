@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: intenship-set1
+    env: node
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
